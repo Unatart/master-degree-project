@@ -1,12 +1,13 @@
 import yaml
-import image_character.image_feature as img_features
-
+import preprocessing.image_character.image_feature as img_features
 
 if __name__ == '__main__':
-    stream = open('config.yaml', 'r')
-    docs = yaml.load(stream)
+    stream = open('../config.yaml', 'r')
+    config = yaml.load(stream)
 
-    img_features.extract(docs["TRAILERS_FOLDER"], docs["VIDEO_INFO_FOLDER"])
+    img_features.extract(config["TRAILERS_FOLDER"], config["VIDEO_INFO_FOLDER"])
+    # audio.create_audiofile.extract_audio(config["TRAILERS_FOLDER"], config["AUDIO_FOLDER"], config["AUDIO_INFO_FOLDER"])
+
 
 
 # темп (быстрота смены цвета) по кадрам (берем насыщенность и яркость) - собрать среднее по каждому кадру, посмотреть на данные
