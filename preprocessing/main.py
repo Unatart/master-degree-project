@@ -1,12 +1,13 @@
 import yaml
 import preprocessing.image_character.image_feature as img_features
+import preprocessing.audio.create_audiofile as audio
 
 if __name__ == '__main__':
-    stream = open('../config.yaml', 'r')
+    stream = open('preprocessing/config.yaml', 'r')
     config = yaml.load(stream)
 
-    img_features.extract(config["TRAILERS_FOLDER"], config["VIDEO_INFO_FOLDER"])
-    # audio.create_audiofile.extract_audio(config["TRAILERS_FOLDER"], config["AUDIO_FOLDER"], config["AUDIO_INFO_FOLDER"])
+    # img_features.extract(config["TRAILERS_FOLDER"], config["VIDEO_INFO_FOLDER"])
+    audio.extract_audio(config["TRAILERS_FOLDER"], config["AUDIO_FOLDER"], config["AUDIO_INFO_FOLDER"])
 
 
 

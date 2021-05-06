@@ -6,13 +6,20 @@ import csv
 
 
 def extract(trailers_folder, info_folder):
-    files = [f for f in listdir(trailers_folder) if isfile(join(trailers_folder, f))]
-    filtered_files = list(filter(lambda filename: filename[0] != '.', files))
-    for file in filtered_files:
-        try:
+    trailer_files = [f for f in listdir(trailers_folder) if isfile(join(trailers_folder, f))]
+    filtered_files = list(filter(lambda filename: filename[0] != '.', trailer_files))
+    info_files = [f for f in listdir(info_folder) if isfile(join(info_folder, f))]
+    print(info_files)
+    files = list(set(filtered_files) - set(info_files))
+    print(files)
+    for file in files:
+        # try:
             img_filenames = detect.find_scenes(trailers_folder + file)
             filename = info_folder + file[:-4] + '.csv'
-            csvfile = open(filename, 'r', newline='')
+            try:
+                csvfile = open(filename, 'r', newline='')
+            except:
+                print("no such file: ", filename)
             if exists(filename):
                 reader = csv.reader(csvfile)
                 lines = len(list(reader))
@@ -38,5 +45,5 @@ def extract(trailers_folder, info_folder):
                         'colorfulness': img_info['colorfulness'],
                         'color_hist': img_info['color_hist']
                     })
-        except:
-            print('error with file ' + info_folder + file[:-4] + '.csv')
+        # except:
+        #     print('error with file ' + info_folder + file[:-4] + '.csv')
