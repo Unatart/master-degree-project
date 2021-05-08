@@ -3,11 +3,11 @@ from scenedetect import SceneManager
 from scenedetect.scene_manager import save_images
 from scenedetect.detectors import ContentDetector
 
-def find_scenes(video_path, threshold=65.0):
+
+def find_scenes(video_path, threshold=70.0):
     video_manager = VideoManager([video_path])
     scene_manager = SceneManager()
-    scene_manager.add_detector(
-        ContentDetector(threshold=threshold))
+    scene_manager.add_detector(ContentDetector(threshold=threshold))
 
     video_manager.set_downscale_factor()
 
