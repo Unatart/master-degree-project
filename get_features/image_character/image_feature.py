@@ -1,8 +1,13 @@
 from os import listdir
 from os.path import isfile, join, exists
-import preprocessing.detect_scenes.detect as detect
-from preprocessing.image_character import image_character as img_character
+import get_features.detect_scenes.detect as detect
+from get_features.image_character import image_character as img_character
 import csv
+import glob
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import numpy as np
+import math
 
 
 def process(file, filename, trailers_folder):
@@ -53,3 +58,30 @@ def extract(trailers_folder, info_folder):
                 continue
         process(file, filename, trailers_folder)
         icount += 1
+
+
+def plot_images(np_images, columns=5):
+    count = np_images.shape[0]
+    rows = math.ceil(count / columns)
+
+    fig = plt.figure(figsize=(40, 25))
+    fig.subplots_adjust(left=0.1,
+                        bottom=0.1,
+                        right=0.9,
+                        top=0.9,
+                        wspace=0.005,
+                        hspace=0.005)
+    subplots = []
+    for index in range(count):
+        subplots.append(fig.add_subplot(rows, columns, index + 1))
+        plt.imshow(np_images[index])
+        plt.axis("off")
+
+    plt.show()
+
+
+def show(name):
+    images = []
+    for img_path in glob.glob('/Volumes/Seagate/natasha-diploma/trailers_mp4/' + name + '/*.jpg'):
+        images.append(mpimg.imread(img_path))
+    plot_images(np.array(images))

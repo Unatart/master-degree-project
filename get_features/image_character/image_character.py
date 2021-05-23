@@ -2,6 +2,7 @@ import cv2
 from sklearn.cluster import MiniBatchKMeans
 import numpy as np
 import color_temp
+import matplotlib.pyplot as plt
 
 
 def rgb_to_hsv(r, g, b):

@@ -18,12 +18,12 @@ def get_objects_from_scene(trailers_folder):
 
             detector = ObjectDetection()
             detector.setModelTypeAsRetinaNet()
-            detector.setModelPath(join(execution_path + "/preprocessing/find_objects/", "resnet50_coco_best_v2.1.0.h5"))
+            detector.setModelPath(join(execution_path + "/get_features/find_objects/", "resnet50_coco_best_v2.1.0.h5"))
             detector.loadModel()
             print(trailers_folder + file[:-4] + '/' + scene)
             detections = detector.detectObjectsFromImage(
                 input_image=join(trailers_folder + file[:-4] + '/', scene),
-                output_image_path=join(execution_path + "/preprocessing/find_objects/", "new.jpeg")
+                output_image_path=join(execution_path + "/get_features/find_objects/", "new.jpeg")
             )
 
             print(detections)
